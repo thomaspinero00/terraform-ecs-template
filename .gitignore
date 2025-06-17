@@ -1,0 +1,8 @@
+envs/dev/.terraform.lock.hcl
+envs/dev/terraform.tfstate
+envs/dev/.terraform/
+
+
+remote-state/.terraform.lock.hcl
+remote-state/terraform.tfstate
+remote-state/.terraform/
