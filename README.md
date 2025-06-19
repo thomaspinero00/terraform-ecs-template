@@ -8,26 +8,27 @@ It’s designed to deploy containerized applications using:
 - Auto Scaling
 - CloudWatch Alarms
 - SNS Notifications
-- ECR for Docker image storage
+- Docker image (public)
 - Custom VPC + modular security
 
 
 #### 📦 100% reusable — just change a few variables and you’re ready to launch your app.
 
 ## 📁 Modular structure
-Each component is isolated in its own module:
+Each component is isolated in its own fully reusable and adaptable module:
 
 ```
 modules/
-├── alb/
+├── alb_base/
+├── alb_listeners/
 ├── autoscaling/
-├── ecr/
 ├── ecs/
 ├── iam/
 ├── monitoring/
-├── security-groups/
+├── route53_acm/
+└── security-groups/
 ├── sns/
-└── vpc/
+├── vpc/
 ```
 
 ## 📋 Requirements
@@ -47,17 +48,55 @@ modules/
 - CloudWatch alarms + email notifications via SNS
 - IAM roles and policies required for all services
 
-## 🚀 Example usage
 
-#### 🧪 How to deploy:
 
- 1. Adapt the `envs/dev/main.tf` file for your proyect
+## 🚀 How to Use
 
+Follow these steps to launch your ECS app on AWS:
+
+### 1. Clone this repository
+```bash
+git clone https://github.com/thomaspinero00/terraform-ecs-template.git
+cd terraform-ecs-template
 ```
+
+### 2. Configure the remote backend (state management)
+```bash
+cd remote-state
 terraform init
-terraform plan
 terraform apply
 ```
+
+> ⚠️ If the apply fails because the S3 bucket name is already taken, update the name in `main.tf` and `/envs/dev/backend.tf` and try again.
+
+### 3. Move to your environment folder
+```bash
+cd ../envs/dev
+```
+
+### 4. Edit your `terraform.tfvars`
+Set the project name, domain, subdomain, and other configuration in `terraform.tfvars`.
+
+> ⚠️ The `project_name` must be unique to avoid naming conflicts in AWS.
+
+### 5. Deploy the infrastructure
+```bash
+terraform init
+terraform apply
+```
+
+
+### 6. Modify your nameservers on your DNS Provider
+During the execution of the `terraform apply` command, you would need to change the `nameservers` on your DNS provider.
+
+If you need guidance to make this step, follow the guide.
+[How to get nameservers from aws cli](./guide_to_get_nameservers.md).
+
+
+### ✅ That’s it!
+After a few minutes, your entire infrastructure will be live — including HTTPS, DNS, auto scaling, ECS, monitoring, and more.
+
+The final app URL will be printed in the `app_url` output. You can now point your DNS (e.g. GoDaddy) to the provided Route53 nameservers.
 
 
 ## 🧠 Included best practices:

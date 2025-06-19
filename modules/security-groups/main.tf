@@ -1,11 +1,18 @@
 resource "aws_security_group" "alb" {
   name        = "${var.project_name}-alb-sg"
-  description = "Allow HTTP from anywhere (${var.project_name})"
+  description = "Allow HTTP and HTTPS from anywhere (${var.project_name})"
   vpc_id      = var.vpc_id
 
   ingress {
     from_port   = 80
     to_port     = 80
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
+  ingress {
+    from_port   = 443
+    to_port     = 443
     protocol    = "tcp"
     cidr_blocks = ["0.0.0.0/0"]
   }
@@ -21,6 +28,7 @@ resource "aws_security_group" "alb" {
     Name = "${var.project_name}-alb-sg"
   }
 }
+
 
 resource "aws_security_group" "ecs" {
   name        = "${var.project_name}-ecs-sg"

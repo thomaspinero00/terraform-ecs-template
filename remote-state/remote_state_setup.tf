@@ -3,10 +3,11 @@ provider "aws" {
 }
 
 resource "aws_s3_bucket" "terraform_state" {
-  bucket = "terraform-state"
+  bucket = "ecs-tf-template-dev-tf-state"
+
   tags = {
     Name        = "Terraform State Bucket"
-    Environment = "dev"
+    Environment = "Dev"
   }
 }
 
@@ -28,7 +29,7 @@ resource "aws_s3_bucket_server_side_encryption_configuration" "terraform_state_e
 }
 
 resource "aws_dynamodb_table" "terraform_lock" {
-  name         = "terraform-lock"
+  name         = "ecs-tf-template-dev-tf-lock"
   billing_mode = "PAY_PER_REQUEST"
   hash_key     = "LockID"
 
@@ -39,6 +40,6 @@ resource "aws_dynamodb_table" "terraform_lock" {
 
   tags = {
     Name        = "Terraform Lock Table"
-    Environment = "dev"
+    Environment = "Dev"
   }
 }

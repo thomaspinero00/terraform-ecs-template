@@ -39,3 +39,9 @@ variable "project_name" {
   description = "Name of the project"
   type        = string
 }
+
+
+variable "listener_dependency" {
+  description = "Used to enforce dependency on ALB listener"
+  type        = string
+}
