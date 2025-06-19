@@ -76,12 +76,11 @@ ns-89.awsdns-11.com     ns-1069.awsdns-05.org   ns-971.awsdns-57.net    ns-1574.
 3. Replace the existing **Nameservers** with the ones returned by AWS.
 4. Save changes.
 
-🕐 Note: DNS propagation may take up to 24–48 hours, but it's usually faster.
-
-
-
 Example:
+
 ![Nameservers edition example.](/nameservers_edition_example.jpeg "Nameservers edition example.")
+
+🕐 Note: DNS propagation may take up to 24–48 hours, but it's usually faster.
 
 ## 🧑‍💻 Author
 Built by **@thomaspinero00**
