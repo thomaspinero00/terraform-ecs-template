@@ -85,8 +85,21 @@ terraform init
 terraform apply
 ```
 
+### 6. Push a dummy image to ECR (first-time setup)
+After the infrastructure is created, your private ECR repository will be empty.
 
-### 6. Modify your nameservers on your DNS Provider
+To ensure ECS can start your app without errors, run the provided script to upload a placeholder (dummy) image:
+
+```
+bash scripts/push_dummy_image.sh
+```
+
+> This script logs in to ECR, pulls a lightweight public image (`nginx:alpine`), tags it, and pushes it to your new ECR repository as latest.
+
+You can replace this image later with your own app image—see the documentation for more details.
+
+
+### 7. Modify your nameservers on your DNS Provider
 During the execution of the `terraform apply` command, you would need to change the `nameservers` on your DNS provider.
 
 If you need guidance to make this step, follow the guide.

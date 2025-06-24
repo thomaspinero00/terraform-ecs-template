@@ -16,7 +16,7 @@ aws route53 list-hosted-zones-by-name --dns-name <YOUR_DOMAIN>
 ### ✅ Example:
 
 ```bash
-aws route53 list-hosted-zones-by-name --dns-name example.com
+aws route53 list-hosted-zones-by-name --dns-name tradenethub.com
 ```
 
 #### ✅ Sample Output:
@@ -56,7 +56,7 @@ aws route53 get-hosted-zone --id /hostedzone/<HOSTED_ZONE_ID> \
 ### ✅ Example:
 
 ```bash
-aws route53 get-hosted-zone --id /hostedzone/Z0599644366LHF6SUYMLK \
+aws route53 get-hosted-zone --id /hostedzone/Z06442391HNEV2UXB75GT \
   --query "DelegationSet.NameServers" \
   --output text
 ```

@@ -47,11 +47,18 @@ module "alb_listeners" {
   certificate_arn  = module.route53_acm.certificate_arn
 }
 
+
+module "ecr" {
+  source       = "../../modules/ecr"
+  project_name = var.project_name
+}
+
+
 module "ecs" {
   project_name            = var.project_name
   source                  = "../../modules/ecs"
   cluster_name            = var.cluster_name
-  container_image         = var.container_image
+  container_image         = "${module.ecr.repository_url}:latest"
   task_execution_role_arn = module.iam.ecs_task_execution_role_arn
   subnet_ids              = module.vpc.private_subnet_ids
   security_group_ids      = [module.security_groups.ecs_sg_id]

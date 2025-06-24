@@ -6,3 +6,4 @@ envs/dev/.terraform/
 remote-state/.terraform.lock.hcl
 remote-state/terraform.tfstate
 remote-state/.terraform/
+remote-state/terraform.tfstate.backup
